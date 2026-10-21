@@ -852,6 +852,7 @@ fun AgentScreen(
                                     AgentKind.ANTIGRAVITY -> "Antigravity"
                                     AgentKind.DEEPSEEK_HARNESS -> "DeepSeek"
                                     AgentKind.CLAUDE_CODE -> "Claude Code"
+                                    AgentKind.HERMES -> "Hermes"
                                 }
                                 Surface(
                                     shape = RoundedCornerShape(12.dp),
@@ -947,6 +948,7 @@ fun AgentScreen(
                                 AgentKind.CLAUDE_CODE -> R.string.agent_title_claude
                                 AgentKind.DEEPSEEK_HARNESS -> R.string.agent_title_deepseek
                                 AgentKind.ANTIGRAVITY -> R.string.agent_title_antigravity
+                                AgentKind.HERMES -> R.string.agent_title_hermes
                             },
                         )
                         Spacer(Modifier.height(8.dp))
