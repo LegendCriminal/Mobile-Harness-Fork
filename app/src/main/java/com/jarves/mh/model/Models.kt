@@ -1,4 +1,4 @@
-package com.jarves.mh.model
+package com.harnessfork.lc.model
 
 import java.time.Instant
 import java.text.Normalizer

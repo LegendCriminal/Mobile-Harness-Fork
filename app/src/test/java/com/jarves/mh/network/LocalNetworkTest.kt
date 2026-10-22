@@ -1,4 +1,4 @@
-package com.jarves.mh.network
+package com.harnessfork.lc.network
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

@@ -1,4 +1,4 @@
-package com.jarves.mh.ui
+package com.harnessfork.lc.ui
 
 import android.app.Application
 import android.app.ActivityManager
@@ -22,78 +22,78 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import com.jarves.mh.BuildConfig
-import com.jarves.mh.R
-import com.jarves.mh.data.ApiKeyVault
-import com.jarves.mh.data.ApiKeyInfo
-import com.jarves.mh.data.AppPreferences
-import com.jarves.mh.model.ActivityItem
-import com.jarves.mh.model.AgentKind
-import com.jarves.mh.model.ChangeItem
-import com.jarves.mh.model.ChatMessage
-import com.jarves.mh.model.ChatAttachment
-import com.jarves.mh.model.DevStack
-import com.jarves.mh.model.Project
-import com.jarves.mh.model.ProjectKind
-import com.jarves.mh.model.ProjectType
-import com.jarves.mh.model.AndroidTemplate
-import com.jarves.mh.model.ProjectChat
-import com.jarves.mh.model.ProviderKind
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.RuntimeEvent
-import com.jarves.mh.model.ToolRequest
-import com.jarves.mh.model.WorkspaceEntry
-import com.jarves.mh.model.projectSlug
-import com.jarves.mh.model.generateQuickChatIdentity
-import com.jarves.mh.model.providerProtocolForAgent
-import com.jarves.mh.network.ConnectionValidation
-import com.jarves.mh.network.ModelDiscoveryResult
-import com.jarves.mh.network.ProviderApiClient
-import com.jarves.mh.network.GitHubRepository
-import com.jarves.mh.runtime.ClaudeRuntimeBridge
-import com.jarves.mh.runtime.DshRuntimeBridge
-import com.jarves.mh.runtime.AgentRegistry
-import com.jarves.mh.runtime.AgentUpdateInfo
-import com.jarves.mh.runtime.AntigravityAuthController
-import com.jarves.mh.runtime.AntigravityAuthState
-import com.jarves.mh.runtime.AntigravityAuthStatus
-import com.jarves.mh.runtime.AntigravityRuntimeBridge
-import com.jarves.mh.runtime.NativeSpawnProcess
-import com.jarves.mh.runtime.RuntimeInstallProgress
-import com.jarves.mh.runtime.RuntimeInstaller
-import com.jarves.mh.runtime.RuntimeSetupController
-import com.jarves.mh.runtime.RuntimeSetupService
-import com.jarves.mh.runtime.RuntimeSetupSnapshot
-import com.jarves.mh.runtime.RuntimeSetupStatus
-import com.jarves.mh.runtime.readHeadBytes
-import com.jarves.mh.runtime.readTailText
-import com.jarves.mh.runtime.supportsArm64Runtime
-import com.jarves.mh.runtime.AndroidAppInstaller
-import com.jarves.mh.runtime.AndroidBuildPhase
-import com.jarves.mh.runtime.AndroidBuildRecord
-import com.jarves.mh.runtime.AndroidAction
-import com.jarves.mh.runtime.AndroidApkInfo
-import com.jarves.mh.runtime.AndroidBuildIssue
-import com.jarves.mh.runtime.AndroidBuildStage
-import com.jarves.mh.runtime.AndroidHealthCheck
-import com.jarves.mh.runtime.AndroidHealthFix
-import com.jarves.mh.runtime.AndroidHealthStatus
-import com.jarves.mh.runtime.AndroidLogLevel
-import com.jarves.mh.runtime.AndroidLogLine
-import com.jarves.mh.runtime.AndroidLogcatState
-import com.jarves.mh.runtime.AndroidProjectTemplateGenerator
-import com.jarves.mh.runtime.RuntimeExecutionService
-import com.jarves.mh.runtime.RuntimeTaskController
-import com.jarves.mh.runtime.androidGradleCommand
-import com.jarves.mh.runtime.diagnoseAndroidBuildFailure
-import com.jarves.mh.runtime.findAndroidProjectRoot
-import com.jarves.mh.runtime.findDebugApk
-import com.jarves.mh.runtime.findReusableDebugApk
-import com.jarves.mh.runtime.inferAndroidBuildStage
-import com.jarves.mh.runtime.isDebugApkStale
-import com.jarves.mh.runtime.parseAndroidBuildIssues
-import com.jarves.mh.update.AppUpdateInfo
-import com.jarves.mh.update.AppUpdater
+import com.harnessfork.lc.BuildConfig
+import com.harnessfork.lc.R
+import com.harnessfork.lc.data.ApiKeyVault
+import com.harnessfork.lc.data.ApiKeyInfo
+import com.harnessfork.lc.data.AppPreferences
+import com.harnessfork.lc.model.ActivityItem
+import com.harnessfork.lc.model.AgentKind
+import com.harnessfork.lc.model.ChangeItem
+import com.harnessfork.lc.model.ChatMessage
+import com.harnessfork.lc.model.ChatAttachment
+import com.harnessfork.lc.model.DevStack
+import com.harnessfork.lc.model.Project
+import com.harnessfork.lc.model.ProjectKind
+import com.harnessfork.lc.model.ProjectType
+import com.harnessfork.lc.model.AndroidTemplate
+import com.harnessfork.lc.model.ProjectChat
+import com.harnessfork.lc.model.ProviderKind
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.RuntimeEvent
+import com.harnessfork.lc.model.ToolRequest
+import com.harnessfork.lc.model.WorkspaceEntry
+import com.harnessfork.lc.model.projectSlug
+import com.harnessfork.lc.model.generateQuickChatIdentity
+import com.harnessfork.lc.model.providerProtocolForAgent
+import com.harnessfork.lc.network.ConnectionValidation
+import com.harnessfork.lc.network.ModelDiscoveryResult
+import com.harnessfork.lc.network.ProviderApiClient
+import com.harnessfork.lc.network.GitHubRepository
+import com.harnessfork.lc.runtime.ClaudeRuntimeBridge
+import com.harnessfork.lc.runtime.DshRuntimeBridge
+import com.harnessfork.lc.runtime.AgentRegistry
+import com.harnessfork.lc.runtime.AgentUpdateInfo
+import com.harnessfork.lc.runtime.AntigravityAuthController
+import com.harnessfork.lc.runtime.AntigravityAuthState
+import com.harnessfork.lc.runtime.AntigravityAuthStatus
+import com.harnessfork.lc.runtime.AntigravityRuntimeBridge
+import com.harnessfork.lc.runtime.NativeSpawnProcess
+import com.harnessfork.lc.runtime.RuntimeInstallProgress
+import com.harnessfork.lc.runtime.RuntimeInstaller
+import com.harnessfork.lc.runtime.RuntimeSetupController
+import com.harnessfork.lc.runtime.RuntimeSetupService
+import com.harnessfork.lc.runtime.RuntimeSetupSnapshot
+import com.harnessfork.lc.runtime.RuntimeSetupStatus
+import com.harnessfork.lc.runtime.readHeadBytes
+import com.harnessfork.lc.runtime.readTailText
+import com.harnessfork.lc.runtime.supportsArm64Runtime
+import com.harnessfork.lc.runtime.AndroidAppInstaller
+import com.harnessfork.lc.runtime.AndroidBuildPhase
+import com.harnessfork.lc.runtime.AndroidBuildRecord
+import com.harnessfork.lc.runtime.AndroidAction
+import com.harnessfork.lc.runtime.AndroidApkInfo
+import com.harnessfork.lc.runtime.AndroidBuildIssue
+import com.harnessfork.lc.runtime.AndroidBuildStage
+import com.harnessfork.lc.runtime.AndroidHealthCheck
+import com.harnessfork.lc.runtime.AndroidHealthFix
+import com.harnessfork.lc.runtime.AndroidHealthStatus
+import com.harnessfork.lc.runtime.AndroidLogLevel
+import com.harnessfork.lc.runtime.AndroidLogLine
+import com.harnessfork.lc.runtime.AndroidLogcatState
+import com.harnessfork.lc.runtime.AndroidProjectTemplateGenerator
+import com.harnessfork.lc.runtime.RuntimeExecutionService
+import com.harnessfork.lc.runtime.RuntimeTaskController
+import com.harnessfork.lc.runtime.androidGradleCommand
+import com.harnessfork.lc.runtime.diagnoseAndroidBuildFailure
+import com.harnessfork.lc.runtime.findAndroidProjectRoot
+import com.harnessfork.lc.runtime.findDebugApk
+import com.harnessfork.lc.runtime.findReusableDebugApk
+import com.harnessfork.lc.runtime.inferAndroidBuildStage
+import com.harnessfork.lc.runtime.isDebugApkStale
+import com.harnessfork.lc.runtime.parseAndroidBuildIssues
+import com.harnessfork.lc.update.AppUpdateInfo
+import com.harnessfork.lc.update.AppUpdater
 import java.io.File
 import java.io.RandomAccessFile
 import java.nio.ByteBuffer
@@ -250,7 +250,7 @@ private data class ProjectTerminalResult(
 )
 
 private data class RuntimeRetryRequest(
-    val runtime: com.jarves.mh.runtime.RuntimeBridge,
+    val runtime: com.harnessfork.lc.runtime.RuntimeBridge,
     val project: Project,
     val prompt: String,
     val history: List<ChatMessage>,
@@ -290,7 +290,7 @@ data class AppUiState(
     val initialLanguageSelected: Boolean = false,
     val provider: ProviderProfile = ProviderProfile(ProviderKind.ANTHROPIC),
     val activeApiKeyName: String? = null,
-    val themeMode: com.jarves.mh.ui.theme.AppThemeMode = com.jarves.mh.ui.theme.AppThemeMode.DARK,
+    val themeMode: com.harnessfork.lc.ui.theme.AppThemeMode = com.harnessfork.lc.ui.theme.AppThemeMode.DARK,
     val languageCode: String = "system",
     val apiPingStatus: ApiPingStatus = ApiPingStatus.IDLE,
     val apiPingMessage: String? = null,
@@ -428,7 +428,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         },
     )
     private val agentRegistry = AgentRegistry.builtIns(claudeRuntime, dshRuntime, antigravityRuntime)
-    private fun activeRuntime(): com.jarves.mh.runtime.RuntimeBridge = agentRegistry.require(_state.value.agentKind).runtime
+    private fun activeRuntime(): com.harnessfork.lc.runtime.RuntimeBridge = agentRegistry.require(_state.value.agentKind).runtime
     private val providerApi = ProviderApiClient(application)
     private fun appUpdater(): AppUpdater = AppUpdater(
         getApplication(),
@@ -494,8 +494,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             ),
             antigravityModel = preferences.antigravityModel,
             antigravityEffort = preferences.antigravityEffort,
-            themeMode = runCatching { com.jarves.mh.ui.theme.AppThemeMode.valueOf(preferences.themeMode.uppercase()) }
-                .getOrDefault(com.jarves.mh.ui.theme.AppThemeMode.DARK),
+            themeMode = runCatching { com.harnessfork.lc.ui.theme.AppThemeMode.valueOf(preferences.themeMode.uppercase()) }
+                .getOrDefault(com.harnessfork.lc.ui.theme.AppThemeMode.DARK),
             languageCode = preferences.languageCode,
             projects = preferences.loadProjects(),
             githubAuthStatus = GitHubAuthStatus.DISCONNECTED,
@@ -1651,8 +1651,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     (0 until array.length()).mapNotNull { index ->
                         array.optJSONObject(index)?.let { item ->
                             AndroidBuildIssue(
-                                severity = runCatching { com.jarves.mh.runtime.AndroidIssueSeverity.valueOf(item.optString("severity")) }
-                                    .getOrDefault(com.jarves.mh.runtime.AndroidIssueSeverity.ERROR),
+                                severity = runCatching { com.harnessfork.lc.runtime.AndroidIssueSeverity.valueOf(item.optString("severity")) }
+                                    .getOrDefault(com.harnessfork.lc.runtime.AndroidIssueSeverity.ERROR),
                                 title = item.optString("title"),
                                 detail = item.optString("detail"),
                                 suggestion = item.optString("suggestion").takeIf(String::isNotBlank),
@@ -1978,15 +1978,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     fun toggleTheme() {
-        val next = if (_state.value.themeMode == com.jarves.mh.ui.theme.AppThemeMode.DARK) {
-            com.jarves.mh.ui.theme.AppThemeMode.LIGHT
+        val next = if (_state.value.themeMode == com.harnessfork.lc.ui.theme.AppThemeMode.DARK) {
+            com.harnessfork.lc.ui.theme.AppThemeMode.LIGHT
         } else {
-            com.jarves.mh.ui.theme.AppThemeMode.DARK
+            com.harnessfork.lc.ui.theme.AppThemeMode.DARK
         }
         setThemeMode(next)
     }
 
-    fun setThemeMode(mode: com.jarves.mh.ui.theme.AppThemeMode) {
+    fun setThemeMode(mode: com.harnessfork.lc.ui.theme.AppThemeMode) {
         preferences.themeMode = mode.name.lowercase()
         _state.update { it.copy(themeMode = mode) }
     }
@@ -2636,7 +2636,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     runtime.rootfs,
                     workspace,
                     emptyMap(),
-                    listOf(com.jarves.mh.runtime.RuntimeInstaller.AGY_GUEST_PATH, "models"),
+                    listOf(com.harnessfork.lc.runtime.RuntimeInstaller.AGY_GUEST_PATH, "models"),
                     guestWorkspacePath = "/workspace/antigravity-models",
                     emulateHardLinks = false,
                 )
@@ -2825,7 +2825,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     suspend fun validateProvider(
         profile: ProviderProfile,
         secret: String,
-        models: List<com.jarves.mh.network.DiscoveredModel>,
+        models: List<com.harnessfork.lc.network.DiscoveredModel>,
     ): ConnectionValidation {
         val key = secret.ifBlank { vault.get(profile.kind.name).orEmpty() }
         return providerApi.validate(
@@ -3769,23 +3769,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun startGitHubForegroundOperation() {
         ContextCompat.startForegroundService(
             getApplication(),
-            Intent(getApplication(), com.jarves.mh.runtime.RuntimeExecutionService::class.java)
-                .setAction(com.jarves.mh.runtime.RuntimeExecutionService.ACTION_START)
-                .putExtra(com.jarves.mh.runtime.RuntimeExecutionService.EXTRA_PROJECT_NAME, str(R.string.vm_notif_github_signin))
-                .putExtra(com.jarves.mh.runtime.RuntimeExecutionService.EXTRA_TITLE, str(R.string.vm_notif_connecting_github))
-                .putExtra(com.jarves.mh.runtime.RuntimeExecutionService.EXTRA_CAN_STOP, false),
+            Intent(getApplication(), com.harnessfork.lc.runtime.RuntimeExecutionService::class.java)
+                .setAction(com.harnessfork.lc.runtime.RuntimeExecutionService.ACTION_START)
+                .putExtra(com.harnessfork.lc.runtime.RuntimeExecutionService.EXTRA_PROJECT_NAME, str(R.string.vm_notif_github_signin))
+                .putExtra(com.harnessfork.lc.runtime.RuntimeExecutionService.EXTRA_TITLE, str(R.string.vm_notif_connecting_github))
+                .putExtra(com.harnessfork.lc.runtime.RuntimeExecutionService.EXTRA_CAN_STOP, false),
         )
     }
 
     private fun stopGitHubForegroundOperation() {
         runCatching {
             getApplication<Application>().startService(
-                Intent(getApplication(), com.jarves.mh.runtime.RuntimeExecutionService::class.java)
-                    .setAction(com.jarves.mh.runtime.RuntimeExecutionService.ACTION_CANCELLED),
+                Intent(getApplication(), com.harnessfork.lc.runtime.RuntimeExecutionService::class.java)
+                    .setAction(com.harnessfork.lc.runtime.RuntimeExecutionService.ACTION_CANCELLED),
             )
         }.onFailure {
             getApplication<Application>().stopService(
-                Intent(getApplication(), com.jarves.mh.runtime.RuntimeExecutionService::class.java),
+                Intent(getApplication(), com.harnessfork.lc.runtime.RuntimeExecutionService::class.java),
             )
         }
     }
@@ -5383,7 +5383,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         private const val MEMORY_PRESSURE_TERMINAL_LINES = 20
         private const val MEMORY_PRESSURE_LOGCAT_LINES = 500
         private const val MEMORY_PRESSURE_TEXT_CHARS = 64 * 1024
-        const val LOGCAT_GRANT_COMMAND = "adb shell pm grant com.jarves.mh android.permission.READ_LOGS"
+        const val LOGCAT_GRANT_COMMAND = "adb shell pm grant com.harnessfork.lc android.permission.READ_LOGS"
         private const val MAX_ATTACHMENTS_PER_MESSAGE = 5
         private const val MAX_PROCESS_OUTPUT_BYTES = 512 * 1024
         private const val MAX_ATTACHMENT_BYTES = 25L * 1024L * 1024L

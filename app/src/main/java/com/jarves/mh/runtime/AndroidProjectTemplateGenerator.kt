@@ -1,7 +1,7 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.AndroidTemplate
-import com.jarves.mh.model.projectSlug
+import com.harnessfork.lc.model.AndroidTemplate
+import com.harnessfork.lc.model.projectSlug
 import java.io.File
 
 object AndroidProjectTemplateGenerator {

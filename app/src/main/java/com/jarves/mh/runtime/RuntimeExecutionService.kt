@@ -1,4 +1,4 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,9 +8,9 @@ import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
-import com.jarves.mh.MainActivity
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.MainActivity
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
 
 internal object RuntimeTaskController {
     @Volatile var stopAction: (() -> Unit)? = null
@@ -142,7 +142,7 @@ class RuntimeExecutionService : Service() {
     private fun acquireWakeLock() {
         if (wakeLock?.isHeld == true) return
         wakeLock = getSystemService(PowerManager::class.java)
-            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "com.jarves.mh:active-coding-task")
+            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "com.harnessfork.lc:active-coding-task")
             .apply { acquire(MAX_WAKE_LOCK_MS) }
     }
 
@@ -159,12 +159,12 @@ class RuntimeExecutionService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
-        const val ACTION_START = "com.jarves.mh.START_RUNTIME"
-        const val ACTION_STOP = "com.jarves.mh.STOP_RUNTIME"
-        const val ACTION_PROGRESS = "com.jarves.mh.PROGRESS_RUNTIME"
-        const val ACTION_COMPLETE = "com.jarves.mh.COMPLETE_RUNTIME"
-        const val ACTION_FAILED = "com.jarves.mh.FAIL_RUNTIME"
-        const val ACTION_CANCELLED = "com.jarves.mh.CANCEL_RUNTIME"
+        const val ACTION_START = "com.harnessfork.lc.START_RUNTIME"
+        const val ACTION_STOP = "com.harnessfork.lc.STOP_RUNTIME"
+        const val ACTION_PROGRESS = "com.harnessfork.lc.PROGRESS_RUNTIME"
+        const val ACTION_COMPLETE = "com.harnessfork.lc.COMPLETE_RUNTIME"
+        const val ACTION_FAILED = "com.harnessfork.lc.FAIL_RUNTIME"
+        const val ACTION_CANCELLED = "com.harnessfork.lc.CANCEL_RUNTIME"
         const val EXTRA_PROJECT_NAME = "project_name"
         const val EXTRA_DETAIL = "detail"
         const val EXTRA_TITLE = "title"

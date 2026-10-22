@@ -1,19 +1,19 @@
-package com.jarves.mh.data
+package com.harnessfork.lc.data
 
 import android.content.Context
-import com.jarves.mh.model.AgentKind
-import com.jarves.mh.model.ChatMessage
-import com.jarves.mh.model.ChatAttachment
-import com.jarves.mh.model.Project
-import com.jarves.mh.model.ProjectKind
-import com.jarves.mh.model.ProjectType
-import com.jarves.mh.model.AndroidTemplate
-import com.jarves.mh.model.ProjectChat
-import com.jarves.mh.model.ProviderKind
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.defaultDshApiForProvider
-import com.jarves.mh.model.projectSlug
-import com.jarves.mh.model.providersForAgent
+import com.harnessfork.lc.model.AgentKind
+import com.harnessfork.lc.model.ChatMessage
+import com.harnessfork.lc.model.ChatAttachment
+import com.harnessfork.lc.model.Project
+import com.harnessfork.lc.model.ProjectKind
+import com.harnessfork.lc.model.ProjectType
+import com.harnessfork.lc.model.AndroidTemplate
+import com.harnessfork.lc.model.ProjectChat
+import com.harnessfork.lc.model.ProviderKind
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.defaultDshApiForProvider
+import com.harnessfork.lc.model.projectSlug
+import com.harnessfork.lc.model.providersForAgent
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -456,7 +456,7 @@ class AppPreferences(private val context: Context) {
                         (0 until workItems.length()).mapNotNull { index ->
                             runCatching {
                                 workItems.getJSONObject(index).let { item ->
-                                    com.jarves.mh.model.ActivityItem(
+                                    com.harnessfork.lc.model.ActivityItem(
                                         title = item.optString("title"),
                                         detail = item.optString("detail"),
                                         isComplete = item.optBoolean("isComplete", true),

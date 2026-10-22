@@ -1,6 +1,6 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.ChatMessage
+import com.harnessfork.lc.model.ChatMessage
 import java.nio.file.Files
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

@@ -1,4 +1,4 @@
-package com.jarves.mh
+package com.harnessfork.lc
 
 import android.content.Context
 import android.os.Bundle
@@ -19,11 +19,11 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.LayoutDirection.Ltr
 import androidx.compose.ui.unit.LayoutDirection.Rtl
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.jarves.mh.ui.AppStrings
-import com.jarves.mh.ui.LocaleHelper
-import com.jarves.mh.ui.MainViewModel
-import com.jarves.mh.ui.PocketDevApp
-import com.jarves.mh.ui.theme.PocketTheme
+import com.harnessfork.lc.ui.AppStrings
+import com.harnessfork.lc.ui.LocaleHelper
+import com.harnessfork.lc.ui.MainViewModel
+import com.harnessfork.lc.ui.PocketDevApp
+import com.harnessfork.lc.ui.theme.PocketTheme
 
 class MainActivity : ComponentActivity() {
     private var appliedLanguageCode: String? = null

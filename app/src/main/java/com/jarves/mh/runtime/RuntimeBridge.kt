@@ -1,11 +1,11 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.ChatMessage
-import com.jarves.mh.model.ChangeItem
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.ProjectKind
-import com.jarves.mh.model.RuntimeEvent
-import com.jarves.mh.model.ToolRequest
+import com.harnessfork.lc.model.ChatMessage
+import com.harnessfork.lc.model.ChangeItem
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.ProjectKind
+import com.harnessfork.lc.model.RuntimeEvent
+import com.harnessfork.lc.model.ToolRequest
 import kotlinx.coroutines.flow.Flow
 
 data class RuntimeLaunchConfig(
@@ -46,7 +46,7 @@ internal fun List<ChatMessage>.recentWithinCharacterBudget(maxCharacters: Int): 
  * CLIs refuse to start without one. Send a harmless placeholder that such servers ignore.
  */
 internal fun localServerPlaceholderKey(profile: ProviderProfile): String =
-    if (profile.kind == com.jarves.mh.model.ProviderKind.CUSTOM) "no-key-required" else ""
+    if (profile.kind == com.harnessfork.lc.model.ProviderKind.CUSTOM) "no-key-required" else ""
 
 object RuntimeLaunchConfigBuilder {
     fun build(profile: ProviderProfile, authToken: String? = null, localGatewayUrl: String? = null): RuntimeLaunchConfig {
@@ -59,7 +59,7 @@ object RuntimeLaunchConfigBuilder {
             "DISABLE_ERROR_REPORTING" to "1",
         )
         when (profile.kind.protocol) {
-            com.jarves.mh.model.ProviderProtocol.CLAUDE_LOGIN -> {
+            com.harnessfork.lc.model.ProviderProtocol.CLAUDE_LOGIN -> {
                 require(!authToken.isNullOrBlank()) { "Enter a Claude subscription token first" }
                 environment["CLAUDE_CODE_OAUTH_TOKEN"] = authToken
                 // Claude Code gives API-key variables precedence over OAuth. Explicitly
@@ -67,22 +67,22 @@ object RuntimeLaunchConfigBuilder {
                 environment["ANTHROPIC_API_KEY"] = ""
                 environment["ANTHROPIC_AUTH_TOKEN"] = ""
             }
-            com.jarves.mh.model.ProviderProtocol.ANTHROPIC -> {
+            com.harnessfork.lc.model.ProviderProtocol.ANTHROPIC -> {
                 environment["ANTHROPIC_BASE_URL"] = profile.baseUrl.trimEnd('/')
                 environment["ANTHROPIC_MODEL"] = profile.model
             }
-            com.jarves.mh.model.ProviderProtocol.ANTHROPIC_GATEWAY -> {
+            com.harnessfork.lc.model.ProviderProtocol.ANTHROPIC_GATEWAY -> {
                 // Claude Code appends /v1/messages itself; accept base URLs entered with or
                 // without /v1 so the agent hits the same endpoint as Test connection.
                 environment["ANTHROPIC_BASE_URL"] = profile.baseUrl.trim().trimEnd('/').removeSuffix("/v1")
                 environment["ANTHROPIC_MODEL"] = profile.model
             }
-            com.jarves.mh.model.ProviderProtocol.OPENROUTER -> {
+            com.harnessfork.lc.model.ProviderProtocol.OPENROUTER -> {
                 environment["ANTHROPIC_BASE_URL"] = (localGatewayUrl ?: profile.resolvedBaseUrl).trimEnd('/')
                 environment["ANTHROPIC_MODEL"] = profile.model
             }
-            com.jarves.mh.model.ProviderProtocol.OPENAI_RESPONSES,
-            com.jarves.mh.model.ProviderProtocol.OPENAI_CHAT,
+            com.harnessfork.lc.model.ProviderProtocol.OPENAI_RESPONSES,
+            com.harnessfork.lc.model.ProviderProtocol.OPENAI_CHAT,
             -> {
                 require(!localGatewayUrl.isNullOrBlank()) { "A local format gateway is required for this provider" }
                 environment["ANTHROPIC_BASE_URL"] = localGatewayUrl.trimEnd('/')
@@ -90,7 +90,7 @@ object RuntimeLaunchConfigBuilder {
             }
         }
         val runtimeModel = environment["ANTHROPIC_MODEL"] ?: profile.model
-        if (profile.kind.protocol != com.jarves.mh.model.ProviderProtocol.CLAUDE_LOGIN) {
+        if (profile.kind.protocol != com.harnessfork.lc.model.ProviderProtocol.CLAUDE_LOGIN) {
             environment["ANTHROPIC_DEFAULT_OPUS_MODEL"] = runtimeModel
             environment["ANTHROPIC_DEFAULT_SONNET_MODEL"] = runtimeModel
             environment["ANTHROPIC_DEFAULT_HAIKU_MODEL"] = runtimeModel
@@ -102,7 +102,7 @@ object RuntimeLaunchConfigBuilder {
             environment["DISABLE_TELEMETRY"] = "1"
             if (!authToken.isNullOrBlank()) {
                 environment["ANTHROPIC_AUTH_TOKEN"] = authToken
-                if (profile.kind == com.jarves.mh.model.ProviderKind.LLM_ROUTER) {
+                if (profile.kind == com.harnessfork.lc.model.ProviderKind.LLM_ROUTER) {
                     environment["ANTHROPIC_API_KEY"] = ""
                     environment["OPENROUTER_API_KEY"] = authToken
                 } else {

@@ -1,4 +1,4 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 internal fun supportsArm64Runtime(supportedAbis: Array<String>, osArchitecture: String?): Boolean {
     val kernelIsArm64 = osArchitecture.equals("aarch64", ignoreCase = true) ||

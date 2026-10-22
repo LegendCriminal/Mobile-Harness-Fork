@@ -1,8 +1,8 @@
-package com.jarves.mh.network
+package com.harnessfork.lc.network
 
 import android.content.Context
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
 import java.net.HttpURLConnection
 import java.net.URLEncoder
 import java.net.URL

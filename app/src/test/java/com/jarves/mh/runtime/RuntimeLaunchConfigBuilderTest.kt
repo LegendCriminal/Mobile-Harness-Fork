@@ -1,7 +1,7 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.ProviderKind
-import com.jarves.mh.model.ProviderProfile
+import com.harnessfork.lc.model.ProviderKind
+import com.harnessfork.lc.model.ProviderProfile
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull

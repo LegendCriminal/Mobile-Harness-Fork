@@ -1,11 +1,11 @@
-package com.jarves.mh.update
+package com.harnessfork.lc.update
 
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import com.jarves.mh.BuildConfig
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.BuildConfig
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
 import java.io.File
 import java.net.HttpURLConnection
 import java.net.URL

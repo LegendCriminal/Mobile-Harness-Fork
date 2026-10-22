@@ -1,4 +1,4 @@
-package com.jarves.mh.ui
+package com.harnessfork.lc.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -39,7 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.res.stringResource
-import com.jarves.mh.R
+import com.harnessfork.lc.R
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -49,7 +49,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.jarves.mh.ui.theme.PocketOrange
+import com.harnessfork.lc.ui.theme.PocketOrange
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

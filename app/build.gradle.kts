@@ -52,7 +52,7 @@ fun buildConfigString(value: String): String =
     "\"${value.replace("\\", "\\\\").replace("\"", "\\\"")}\""
 
 android {
-    namespace = "com.harnessfork"
+    namespace = "com.harnessfork.lc"
     compileSdk = 36
     // NDK 28 emits flexible-page-size binaries for the static PRoot loader.
     // NDK 26 accepted the max-page-size flag but still produced 4 KiB LOAD
@@ -72,7 +72,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.harnessfork"
+        applicationId = "com.harnessfork.lc"
         minSdk = 28
         // The direct APK retains the proven target-28 PRoot execution path. The
         // Play build targets current Android while its runtime path is validated.

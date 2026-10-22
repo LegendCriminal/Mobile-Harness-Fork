@@ -1,15 +1,15 @@
-package com.jarves.mh.ui
+package com.harnessfork.lc.ui
 
 import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.jarves.mh.R
-import com.jarves.mh.model.AgentKind
-import com.jarves.mh.model.DevStack
-import com.jarves.mh.model.Project
-import com.jarves.mh.model.ProjectChat
-import com.jarves.mh.model.ProviderKind
+import com.harnessfork.lc.R
+import com.harnessfork.lc.model.AgentKind
+import com.harnessfork.lc.model.DevStack
+import com.harnessfork.lc.model.Project
+import com.harnessfork.lc.model.ProjectChat
+import com.harnessfork.lc.model.ProviderKind
 
 /*
  * Display-only labels for model enums. The English fields on the enums stay as-is

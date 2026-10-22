@@ -1,4 +1,4 @@
-package com.jarves.mh.ui
+package com.harnessfork.lc.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
@@ -94,21 +94,21 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.annotation.StringRes
-import com.jarves.mh.R
-import com.jarves.mh.data.ApiKeyInfo
-import com.jarves.mh.model.AgentKind
-import com.jarves.mh.model.DSH_PROTOCOL_PROVIDERS
-import com.jarves.mh.model.ProviderKind
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.defaultDshApiForProvider
-import com.jarves.mh.model.inferredDshApiForUrl
-import com.jarves.mh.model.providersForAgent
-import com.jarves.mh.network.ConnectionValidation
-import com.jarves.mh.network.DiscoveredModel
-import com.jarves.mh.network.ModelDiscoveryResult
-import com.jarves.mh.runtime.AntigravityAuthStatus
-import com.jarves.mh.ui.theme.PocketBlue
-import com.jarves.mh.ui.theme.PocketOrange
+import com.harnessfork.lc.R
+import com.harnessfork.lc.data.ApiKeyInfo
+import com.harnessfork.lc.model.AgentKind
+import com.harnessfork.lc.model.DSH_PROTOCOL_PROVIDERS
+import com.harnessfork.lc.model.ProviderKind
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.defaultDshApiForProvider
+import com.harnessfork.lc.model.inferredDshApiForUrl
+import com.harnessfork.lc.model.providersForAgent
+import com.harnessfork.lc.network.ConnectionValidation
+import com.harnessfork.lc.network.DiscoveredModel
+import com.harnessfork.lc.network.ModelDiscoveryResult
+import com.harnessfork.lc.runtime.AntigravityAuthStatus
+import com.harnessfork.lc.ui.theme.PocketBlue
+import com.harnessfork.lc.ui.theme.PocketOrange
 import kotlinx.coroutines.launch
 
 private data class KeyConnectionStatus(

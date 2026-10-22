@@ -1,4 +1,4 @@
-package com.jarves.mh.network
+package com.harnessfork.lc.network
 
 import java.net.URI
 

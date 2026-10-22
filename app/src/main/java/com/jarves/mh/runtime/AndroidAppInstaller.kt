@@ -1,4 +1,4 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.app.PendingIntent
 import android.content.Context
@@ -9,8 +9,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Process
 import androidx.core.content.FileProvider
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
 import java.io.File
 import java.security.MessageDigest
 import java.util.UUID
@@ -109,10 +109,10 @@ object AndroidAppInstaller {
         return operationId
     }
 
-    const val ACTION_INSTALL_RESULT = "com.jarves.mh.action.APK_INSTALL_RESULT"
-    const val EXTRA_APK_FINGERPRINT = "com.jarves.mh.extra.APK_FINGERPRINT"
-    const val EXTRA_OPERATION_ID = "com.jarves.mh.extra.OPERATION_ID"
-    const val EXTRA_LAUNCH_AFTER_INSTALL = "com.jarves.mh.extra.LAUNCH_AFTER_INSTALL"
+    const val ACTION_INSTALL_RESULT = "com.harnessfork.lc.action.APK_INSTALL_RESULT"
+    const val EXTRA_APK_FINGERPRINT = "com.harnessfork.lc.extra.APK_FINGERPRINT"
+    const val EXTRA_OPERATION_ID = "com.harnessfork.lc.extra.OPERATION_ID"
+    const val EXTRA_LAUNCH_AFTER_INSTALL = "com.harnessfork.lc.extra.LAUNCH_AFTER_INSTALL"
 
     internal fun publish(event: AndroidInstallEvent) {
         _events.tryEmit(event)

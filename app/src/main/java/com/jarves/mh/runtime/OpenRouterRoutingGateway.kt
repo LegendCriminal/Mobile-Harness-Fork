@@ -1,6 +1,6 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.ProviderProfile
+import com.harnessfork.lc.model.ProviderProfile
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.net.HttpURLConnection

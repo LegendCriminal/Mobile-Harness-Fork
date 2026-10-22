@@ -1,4 +1,4 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,11 +9,11 @@ import android.content.Intent
 import android.os.IBinder
 import android.os.PowerManager
 import androidx.core.app.NotificationCompat
-import com.jarves.mh.MainActivity
-import com.jarves.mh.R
-import com.jarves.mh.data.AppPreferences
-import com.jarves.mh.model.DevStack
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.MainActivity
+import com.harnessfork.lc.R
+import com.harnessfork.lc.data.AppPreferences
+import com.harnessfork.lc.model.DevStack
+import com.harnessfork.lc.ui.AppStrings
 import java.io.File
 import java.net.UnknownHostException
 import kotlinx.coroutines.CancellationException
@@ -267,8 +267,8 @@ class RuntimeSetupService : Service() {
                 .mapNotNull { name -> runCatching { DevStack.valueOf(name) }.getOrNull() }
                 .toSet()
             val agent = runCatching {
-                com.jarves.mh.model.AgentKind.valueOf(intent?.getStringExtra(EXTRA_AGENT).orEmpty())
-            }.getOrDefault(com.jarves.mh.model.AgentKind.CLAUDE_CODE)
+                com.harnessfork.lc.model.AgentKind.valueOf(intent?.getStringExtra(EXTRA_AGENT).orEmpty())
+            }.getOrDefault(com.harnessfork.lc.model.AgentKind.CLAUDE_CODE)
             RuntimeSetupController.begin(this)
             installJob = scope.launch {
                 try {
@@ -354,7 +354,7 @@ class RuntimeSetupService : Service() {
     private fun acquireWakeLock() {
         if (wakeLock?.isHeld == true) return
         wakeLock = getSystemService(PowerManager::class.java)
-            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "com.jarves.mh:runtime-setup")
+            .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "com.harnessfork.lc:runtime-setup")
             .apply { acquire(MAX_WAKE_LOCK_MS) }
     }
 
@@ -372,8 +372,8 @@ class RuntimeSetupService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     companion object {
-        const val ACTION_START = "com.jarves.mh.START_SETUP"
-        const val ACTION_STOP = "com.jarves.mh.STOP_SETUP"
+        const val ACTION_START = "com.harnessfork.lc.START_SETUP"
+        const val ACTION_STOP = "com.harnessfork.lc.STOP_SETUP"
         const val EXTRA_STACKS = "selected_stacks"
         const val EXTRA_AGENT = "selected_agent"
         private const val CHANNEL_ID = "runtime-setup"

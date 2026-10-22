@@ -1,8 +1,8 @@
-package com.jarves.mh.ui
+package com.harnessfork.lc.ui
 
 import android.content.Context
-import com.jarves.mh.R
-import com.jarves.mh.runtime.AndroidBuildIssue
+import com.harnessfork.lc.R
+import com.harnessfork.lc.runtime.AndroidBuildIssue
 
 /**
  * The build-output parser in AndroidBuildSupport stays English so it remains pure and

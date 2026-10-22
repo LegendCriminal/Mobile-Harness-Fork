@@ -1,9 +1,9 @@
-package com.jarves.mh.network
+package com.harnessfork.lc.network
 
 import android.content.Context
-import com.jarves.mh.R
-import com.jarves.mh.model.ProviderProtocol
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.R
+import com.harnessfork.lc.model.ProviderProtocol
+import com.harnessfork.lc.ui.AppStrings
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection

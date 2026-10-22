@@ -1,11 +1,11 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.content.Context
-import com.jarves.mh.R
-import com.jarves.mh.model.ChangeItem
-import com.jarves.mh.ui.AppStrings
-import com.jarves.mh.model.DiffLine
-import com.jarves.mh.model.DiffLineType
+import com.harnessfork.lc.R
+import com.harnessfork.lc.model.ChangeItem
+import com.harnessfork.lc.ui.AppStrings
+import com.harnessfork.lc.model.DiffLine
+import com.harnessfork.lc.model.DiffLineType
 import java.io.File
 import java.security.MessageDigest
 import java.util.concurrent.ConcurrentHashMap

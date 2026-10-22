@@ -1,20 +1,20 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.content.Context
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
-import com.jarves.mh.model.ChatMessage
-import com.jarves.mh.model.ChangeItem
-import com.jarves.mh.model.DiffLine
-import com.jarves.mh.model.DiffLineType
-import com.jarves.mh.model.ProviderKind
-import com.jarves.mh.model.ProjectKind
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.RiskLevel
-import com.jarves.mh.model.RuntimeEvent
-import com.jarves.mh.model.ToolRequest
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
+import com.harnessfork.lc.model.ChatMessage
+import com.harnessfork.lc.model.ChangeItem
+import com.harnessfork.lc.model.DiffLine
+import com.harnessfork.lc.model.DiffLineType
+import com.harnessfork.lc.model.ProviderKind
+import com.harnessfork.lc.model.ProjectKind
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.RiskLevel
+import com.harnessfork.lc.model.RuntimeEvent
+import com.harnessfork.lc.model.ToolRequest
 import java.io.File
 import java.io.RandomAccessFile
 import java.security.MessageDigest
@@ -146,8 +146,8 @@ class ClaudeRuntimeBridge(
             createCheckpoint(projectId, workspace)
             val before = snapshot(workspace)
             formatGateway = if (provider.kind.protocol in setOf(
-                    com.jarves.mh.model.ProviderProtocol.OPENAI_CHAT,
-                    com.jarves.mh.model.ProviderProtocol.OPENAI_RESPONSES,
+                    com.harnessfork.lc.model.ProviderProtocol.OPENAI_CHAT,
+                    com.harnessfork.lc.model.ProviderProtocol.OPENAI_RESPONSES,
                 )) LocalFormatGateway(provider, secret).start() else null
             openRouterGateway = if (
                 provider.kind == ProviderKind.LLM_ROUTER && provider.openRouterProviders.isNotEmpty()

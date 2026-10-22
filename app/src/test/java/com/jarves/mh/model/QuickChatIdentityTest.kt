@@ -1,4 +1,4 @@
-package com.jarves.mh.model
+package com.harnessfork.lc.model
 
 import kotlin.random.Random
 import org.junit.Assert.assertFalse

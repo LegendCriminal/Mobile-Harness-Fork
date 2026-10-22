@@ -1,18 +1,18 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.content.Context
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
-import com.jarves.mh.model.ChangeItem
-import com.jarves.mh.model.ChatMessage
-import com.jarves.mh.model.DevStack
-import com.jarves.mh.model.ProjectKind
-import com.jarves.mh.model.ProviderKind
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.RuntimeEvent
-import com.jarves.mh.model.ToolRequest
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
+import com.harnessfork.lc.model.ChangeItem
+import com.harnessfork.lc.model.ChatMessage
+import com.harnessfork.lc.model.DevStack
+import com.harnessfork.lc.model.ProjectKind
+import com.harnessfork.lc.model.ProviderKind
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.RuntimeEvent
+import com.harnessfork.lc.model.ToolRequest
 import java.io.File
 import java.io.RandomAccessFile
 import java.util.UUID
@@ -101,7 +101,7 @@ class DshRuntimeBridge(
             }
             startForegroundRuntime(projectSlug)
             val installed = installer.installedRuntime()
-            check(installer.isAgentInstalled(com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS)) {
+            check(installer.isAgentInstalled(com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS)) {
                 "DeepSeek Harness is not installed. Open Settings → Coding agent to install it."
             }
             installer.ensureDshAndroidCompatibility()

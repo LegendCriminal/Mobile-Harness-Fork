@@ -1,13 +1,13 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.system.Os
-import com.jarves.mh.BuildConfig
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
-import com.jarves.mh.ui.localizedLabel
-import com.jarves.mh.ui.localizedTitle
+import com.harnessfork.lc.BuildConfig
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
+import com.harnessfork.lc.ui.localizedLabel
+import com.harnessfork.lc.ui.localizedTitle
 import java.io.BufferedInputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withTimeout
 import kotlin.coroutines.coroutineContext
-import com.jarves.mh.model.DevStack
+import com.harnessfork.lc.model.DevStack
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream
 import org.apache.commons.compress.compressors.gzip.GzipCompressorInputStream
@@ -149,7 +149,7 @@ class RuntimeInstaller(private val context: Context) {
 
     suspend fun ensureInstalled(
         selectedStacks: Set<DevStack> = emptySet(),
-        agent: com.jarves.mh.model.AgentKind = com.jarves.mh.model.AgentKind.CLAUDE_CODE,
+        agent: com.harnessfork.lc.model.AgentKind = com.harnessfork.lc.model.AgentKind.CLAUDE_CODE,
         onProgress: suspend (RuntimeInstallProgress) -> Unit,
     ): InstalledRuntime {
         require(
@@ -233,9 +233,9 @@ class RuntimeInstaller(private val context: Context) {
         }
 
         when (agent) {
-            com.jarves.mh.model.AgentKind.CLAUDE_CODE -> ensureClaudeInstalled(proot, 0.985f, onProgress)
-            com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS -> ensureDshInstalled(proot, 0.985f, onProgress)
-            com.jarves.mh.model.AgentKind.ANTIGRAVITY -> ensureAgyInstalled(proot, 0.985f, onProgress)
+            com.harnessfork.lc.model.AgentKind.CLAUDE_CODE -> ensureClaudeInstalled(proot, 0.985f, onProgress)
+            com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS -> ensureDshInstalled(proot, 0.985f, onProgress)
+            com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> ensureAgyInstalled(proot, 0.985f, onProgress)
         }
         onProgress(RuntimeInstallProgress(str(R.string.rt_install_setup_complete), 1f))
         return InstalledRuntime(proot, rootfs)
@@ -247,31 +247,31 @@ class RuntimeInstaller(private val context: Context) {
      * separate overlay and is fetched or loaded only when selected.
      */
     suspend fun ensureAgentInstalled(
-        agent: com.jarves.mh.model.AgentKind,
+        agent: com.harnessfork.lc.model.AgentKind,
         onProgress: suspend (RuntimeInstallProgress) -> Unit,
     ) {
         val runtime = installedRuntime()
         when (agent) {
-            com.jarves.mh.model.AgentKind.CLAUDE_CODE -> ensureClaudeInstalled(runtime.proot, 0.05f, onProgress)
-            com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS -> ensureDshInstalled(runtime.proot, 0.05f, onProgress)
-            com.jarves.mh.model.AgentKind.ANTIGRAVITY -> ensureAgyInstalled(runtime.proot, 0.05f, onProgress)
+            com.harnessfork.lc.model.AgentKind.CLAUDE_CODE -> ensureClaudeInstalled(runtime.proot, 0.05f, onProgress)
+            com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS -> ensureDshInstalled(runtime.proot, 0.05f, onProgress)
+            com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> ensureAgyInstalled(runtime.proot, 0.05f, onProgress)
         }
         onProgress(RuntimeInstallProgress(str(R.string.rt_install_ready, agent.localizedTitle(context)), 1f))
     }
 
-    fun isAgentInstalled(agent: com.jarves.mh.model.AgentKind): Boolean {
+    fun isAgentInstalled(agent: com.harnessfork.lc.model.AgentKind): Boolean {
         return when (agent) {
-            com.jarves.mh.model.AgentKind.CLAUDE_CODE -> {
+            com.harnessfork.lc.model.AgentKind.CLAUDE_CODE -> {
                 migrateLegacyClaudeMarker()
                 isInstalled() && File(rootfs, CLAUDE_GUEST_PATH.removePrefix("/")).canExecute() &&
                     !claudeMarker.readTextOrNull().isNullOrBlank()
             }
-            com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS -> isInstalled() &&
+            com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS -> isInstalled() &&
                 // /usr/local/bin/dsh is an absolute guest symlink. File.exists() follows it
                 // against Android's host root and therefore reports false outside PRoot.
                 File(rootfs, "usr/local/lib/dsh/node_modules/.bin/dsh").isFile &&
                 isSupportedDshVersion(dshMarker.readTextOrNull().orEmpty())
-            com.jarves.mh.model.AgentKind.ANTIGRAVITY -> isInstalled() &&
+            com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> isInstalled() &&
                 File(rootfs, AGY_GUEST_PATH.removePrefix("/")).canExecute() &&
                 !agyMarker.readTextOrNull().isNullOrBlank()
         }
@@ -346,62 +346,62 @@ class RuntimeInstaller(private val context: Context) {
      * This intentionally reports what is present in PRoot, even when a newer app build
      * would subsequently offer an agent update.
      */
-    fun installedAgentVersions(): Map<com.jarves.mh.model.AgentKind, String> = buildMap {
+    fun installedAgentVersions(): Map<com.harnessfork.lc.model.AgentKind, String> = buildMap {
         migrateLegacyClaudeMarker()
         claudeMarker.readTextOrNull()
             ?.trim()
-            ?.takeIf { isAgentInstalled(com.jarves.mh.model.AgentKind.CLAUDE_CODE) && it.matches(CLAUDE_VERSION_PATTERN) }
-            ?.let { put(com.jarves.mh.model.AgentKind.CLAUDE_CODE, it) }
+            ?.takeIf { isAgentInstalled(com.harnessfork.lc.model.AgentKind.CLAUDE_CODE) && it.matches(CLAUDE_VERSION_PATTERN) }
+            ?.let { put(com.harnessfork.lc.model.AgentKind.CLAUDE_CODE, it) }
 
         dshMarker.readTextOrNull()
             ?.trim()
-            ?.takeIf { isAgentInstalled(com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS) }
-            ?.let { put(com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS, it) }
+            ?.takeIf { isAgentInstalled(com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS) }
+            ?.let { put(com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS, it) }
 
         agyMarker.readTextOrNull()
             ?.trim()
             ?.takeIf { it.isNotEmpty() && File(rootfs, AGY_GUEST_PATH.removePrefix("/")).canExecute() }
-            ?.let { put(com.jarves.mh.model.AgentKind.ANTIGRAVITY, it) }
+            ?.let { put(com.harnessfork.lc.model.AgentKind.ANTIGRAVITY, it) }
     }
 
     /** Checks each installed agent against its own authoritative release source. */
-    suspend fun checkAgentUpdates(): Map<com.jarves.mh.model.AgentKind, AgentUpdateInfo> {
+    suspend fun checkAgentUpdates(): Map<com.harnessfork.lc.model.AgentKind, AgentUpdateInfo> {
         val installed = installedAgentVersions()
         return buildMap {
-            installed[com.jarves.mh.model.AgentKind.CLAUDE_CODE]?.let { current ->
+            installed[com.harnessfork.lc.model.AgentKind.CLAUDE_CODE]?.let { current ->
                 runCatching {
                     JSONObject(fetchText("https://registry.npmjs.org/@anthropic-ai/claude-code/latest")).getString("version")
                 }.getOrNull()?.takeIf { isVersionNewer(it, current) }?.let { latest ->
-                    put(com.jarves.mh.model.AgentKind.CLAUDE_CODE, AgentUpdateInfo(current, latest))
+                    put(com.harnessfork.lc.model.AgentKind.CLAUDE_CODE, AgentUpdateInfo(current, latest))
                 }
             }
-            installed[com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS]?.let { current ->
+            installed[com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS]?.let { current ->
                 // DSH needs Android-specific filesystem patches. Only advertise the
                 // release validated and bundled with this PocketDev build; npm's
                 // latest tag may point at a source layout we cannot safely patch.
                 DSH_VERSION.takeIf { isVersionNewer(it, current) }?.let { compatible ->
-                    put(com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS, AgentUpdateInfo(current, compatible))
+                    put(com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS, AgentUpdateInfo(current, compatible))
                 }
             }
-            installed[com.jarves.mh.model.AgentKind.ANTIGRAVITY]?.let { current ->
+            installed[com.harnessfork.lc.model.AgentKind.ANTIGRAVITY]?.let { current ->
                 runCatching { fetchAgyManifest().getString("version") }.getOrNull()
                     ?.takeIf { isVersionNewer(it, current) }?.let { latest ->
-                        put(com.jarves.mh.model.AgentKind.ANTIGRAVITY, AgentUpdateInfo(current, latest))
+                        put(com.harnessfork.lc.model.AgentKind.ANTIGRAVITY, AgentUpdateInfo(current, latest))
                     }
             }
         }
     }
 
     suspend fun updateAgent(
-        agent: com.jarves.mh.model.AgentKind,
+        agent: com.harnessfork.lc.model.AgentKind,
         expectedVersion: String,
         onProgress: suspend (RuntimeInstallProgress) -> Unit,
     ) {
         val runtime = installedRuntime()
         when (agent) {
-            com.jarves.mh.model.AgentKind.CLAUDE_CODE -> updateClaude(runtime, expectedVersion, onProgress)
-            com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS -> updateDsh(runtime, expectedVersion, onProgress)
-            com.jarves.mh.model.AgentKind.ANTIGRAVITY -> updateAgy(runtime, expectedVersion, onProgress)
+            com.harnessfork.lc.model.AgentKind.CLAUDE_CODE -> updateClaude(runtime, expectedVersion, onProgress)
+            com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS -> updateDsh(runtime, expectedVersion, onProgress)
+            com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> updateAgy(runtime, expectedVersion, onProgress)
         }
         onProgress(RuntimeInstallProgress(str(R.string.rt_install_version_ready, agent.localizedTitle(context), expectedVersion), 1f, event = RuntimeInstallEvent.COMPLETED))
     }
@@ -569,7 +569,7 @@ class RuntimeInstaller(private val context: Context) {
         onProgress: suspend (RuntimeInstallProgress) -> Unit,
     ) {
         migrateLegacyClaudeMarker()
-        if (isAgentInstalled(com.jarves.mh.model.AgentKind.CLAUDE_CODE)) return
+        if (isAgentInstalled(com.harnessfork.lc.model.AgentKind.CLAUDE_CODE)) return
         installRuntimeOverlay(
             bundle = CLAUDE_BUNDLE,
             message = str(R.string.rt_install_installing_version, "Claude Code", CLAUDE_BUNDLED_VERSION),
@@ -588,7 +588,7 @@ class RuntimeInstaller(private val context: Context) {
         fraction: Float,
         onProgress: suspend (RuntimeInstallProgress) -> Unit,
     ) {
-        if (isAgentInstalled(com.jarves.mh.model.AgentKind.ANTIGRAVITY)) return
+        if (isAgentInstalled(com.harnessfork.lc.model.AgentKind.ANTIGRAVITY)) return
         installRuntimeOverlay(
             bundle = AGY_BUNDLE,
             message = str(R.string.rt_install_installing_version, "Antigravity CLI", AGY_VERSION),
@@ -599,7 +599,7 @@ class RuntimeInstaller(private val context: Context) {
         )
         verifyGuest(proot, "$AGY_GUEST_PATH --version", str(R.string.rt_install_verify_failed, "Antigravity CLI"))
         agyMarker.writeText(AGY_VERSION)
-        require(isAgentInstalled(com.jarves.mh.model.AgentKind.ANTIGRAVITY)) {
+        require(isAgentInstalled(com.harnessfork.lc.model.AgentKind.ANTIGRAVITY)) {
             "Antigravity CLI installation is incomplete"
         }
     }
@@ -609,7 +609,7 @@ class RuntimeInstaller(private val context: Context) {
         fraction: Float,
         onProgress: suspend (RuntimeInstallProgress) -> Unit,
     ) {
-        if (isAgentInstalled(com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS)) {
+        if (isAgentInstalled(com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS)) {
             ensureDshAndroidCompatibility()
             return
         }
@@ -630,7 +630,7 @@ class RuntimeInstaller(private val context: Context) {
         )
         ensureDshAndroidCompatibility()
         verifyGuest(proot, "/usr/local/bin/dsh --profile headless --help", str(R.string.rt_install_verify_failed, "DeepSeek Harness"))
-        require(isAgentInstalled(com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS)) {
+        require(isAgentInstalled(com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS)) {
             "The DeepSeek Harness runtime bundle is incomplete"
         }
     }
@@ -645,7 +645,7 @@ class RuntimeInstaller(private val context: Context) {
      * no-clobber guarantee. Existing-file edits continue to use atomic rename.
      */
     fun ensureDshAndroidCompatibility() {
-        if (!isAgentInstalled(com.jarves.mh.model.AgentKind.DEEPSEEK_HARNESS)) return
+        if (!isAgentInstalled(com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS)) return
         applyDshAndroidCompatibility(File(rootfs, "usr/local/lib/dsh"), dshMarker.readTextOrNull().orEmpty())
         dshAndroidCompatibilityMarker.writeText(DSH_ANDROID_COMPATIBILITY_VERSION)
     }

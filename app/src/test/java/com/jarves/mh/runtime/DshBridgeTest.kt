@@ -1,13 +1,13 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.AgentKind
-import com.jarves.mh.model.DEEPSEEK_HARNESS_PROVIDERS
-import com.jarves.mh.model.ProviderKind
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.ProviderProtocol
-import com.jarves.mh.model.inferredDshApiForUrl
-import com.jarves.mh.model.providerProtocolForAgent
-import com.jarves.mh.model.providersForAgent
+import com.harnessfork.lc.model.AgentKind
+import com.harnessfork.lc.model.DEEPSEEK_HARNESS_PROVIDERS
+import com.harnessfork.lc.model.ProviderKind
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.ProviderProtocol
+import com.harnessfork.lc.model.inferredDshApiForUrl
+import com.harnessfork.lc.model.providerProtocolForAgent
+import com.harnessfork.lc.model.providersForAgent
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull

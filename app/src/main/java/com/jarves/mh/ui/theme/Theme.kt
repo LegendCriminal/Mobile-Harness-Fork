@@ -1,4 +1,4 @@
-package com.jarves.mh.ui.theme
+package com.harnessfork.lc.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme

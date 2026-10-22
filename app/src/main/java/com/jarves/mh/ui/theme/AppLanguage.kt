@@ -1,4 +1,4 @@
-package com.jarves.mh.ui.theme
+package com.harnessfork.lc.ui.theme
 
 enum class AppLanguage(
     val code: String,

@@ -1,6 +1,6 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.AgentKind
+import com.harnessfork.lc.model.AgentKind
 
 /** Features exposed by an agent without teaching shared UI about a concrete CLI. */
 enum class AgentCapability {

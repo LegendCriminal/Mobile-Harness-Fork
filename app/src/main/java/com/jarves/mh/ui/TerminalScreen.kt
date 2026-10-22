@@ -1,4 +1,4 @@
-package com.jarves.mh.ui
+package com.harnessfork.lc.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -85,10 +85,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
-import com.jarves.mh.R
-import com.jarves.mh.ui.theme.AppThemeMode
-import com.jarves.mh.ui.theme.PocketGreen
-import com.jarves.mh.ui.theme.PocketOrange
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.theme.AppThemeMode
+import com.harnessfork.lc.ui.theme.PocketGreen
+import com.harnessfork.lc.ui.theme.PocketOrange
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

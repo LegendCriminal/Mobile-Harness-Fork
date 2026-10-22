@@ -1,15 +1,15 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.content.Context
 import androidx.core.content.ContextCompat
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
-import com.jarves.mh.model.ChatMessage
-import com.jarves.mh.model.ChangeItem
-import com.jarves.mh.model.ProjectKind
-import com.jarves.mh.model.ProviderProfile
-import com.jarves.mh.model.RuntimeEvent
-import com.jarves.mh.model.ToolRequest
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
+import com.harnessfork.lc.model.ChatMessage
+import com.harnessfork.lc.model.ChangeItem
+import com.harnessfork.lc.model.ProjectKind
+import com.harnessfork.lc.model.ProviderProfile
+import com.harnessfork.lc.model.RuntimeEvent
+import com.harnessfork.lc.model.ToolRequest
 import java.io.File
 import java.io.RandomAccessFile
 import java.util.UUID
@@ -203,7 +203,7 @@ class AntigravityRuntimeBridge(
      * The timeout is intentionally internal — callers only see success/failure.
      */
     suspend fun hello(timeoutMillis: Long = HELLO_TIMEOUT_MILLIS): String = withContext(Dispatchers.IO) {
-        if (!installer.isAgentInstalled(com.jarves.mh.model.AgentKind.ANTIGRAVITY)) {
+        if (!installer.isAgentInstalled(com.harnessfork.lc.model.AgentKind.ANTIGRAVITY)) {
             throw IllegalStateException("Antigravity CLI is not installed.")
         }
         val startedAtMillis = System.currentTimeMillis()
@@ -328,7 +328,7 @@ class AntigravityRuntimeBridge(
         lastForegroundProgressAt = 0L
         finished.remove(sessionId)
         eventBus.emit(RuntimeEvent.SessionStarted(sessionId))
-        if (!installer.isAgentInstalled(com.jarves.mh.model.AgentKind.ANTIGRAVITY)) {
+        if (!installer.isAgentInstalled(com.harnessfork.lc.model.AgentKind.ANTIGRAVITY)) {
             emitFailure(sessionId, "Antigravity CLI is not installed. Open Settings → Coding agent to install it.")
             return@withContext sessionId
         }

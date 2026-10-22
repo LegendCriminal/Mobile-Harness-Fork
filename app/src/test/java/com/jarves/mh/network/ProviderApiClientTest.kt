@@ -1,6 +1,6 @@
-package com.jarves.mh.network
+package com.harnessfork.lc.network
 
-import com.jarves.mh.model.ProviderProtocol
+import com.harnessfork.lc.model.ProviderProtocol
 import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

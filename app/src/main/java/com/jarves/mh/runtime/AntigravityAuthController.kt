@@ -1,8 +1,8 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.content.Context
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
 import java.io.File
 import java.io.RandomAccessFile
 import kotlinx.coroutines.Dispatchers
@@ -49,7 +49,7 @@ class AntigravityAuthController(
 
     suspend fun beginLogin() = withContext(Dispatchers.IO) {
         if (process?.isAlive == true) return@withContext
-        if (!installer.isAgentInstalled(com.jarves.mh.model.AgentKind.ANTIGRAVITY)) {
+        if (!installer.isAgentInstalled(com.harnessfork.lc.model.AgentKind.ANTIGRAVITY)) {
             mutableState.value = AntigravityAuthState(
                 AntigravityAuthStatus.ERROR,
                 message = str(R.string.rt_agy_install_first),

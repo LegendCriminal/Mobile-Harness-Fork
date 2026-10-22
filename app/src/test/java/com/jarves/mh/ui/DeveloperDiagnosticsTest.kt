@@ -1,4 +1,4 @@
-package com.jarves.mh.ui
+package com.harnessfork.lc.ui
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

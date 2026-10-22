@@ -1,12 +1,12 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageInstaller
 import android.widget.Toast
-import com.jarves.mh.R
-import com.jarves.mh.ui.AppStrings
+import com.harnessfork.lc.R
+import com.harnessfork.lc.ui.AppStrings
 
 class AndroidAppInstallReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {

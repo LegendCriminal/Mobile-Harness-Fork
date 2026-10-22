@@ -1,6 +1,6 @@
-package com.jarves.mh.runtime
+package com.harnessfork.lc.runtime
 
-import com.jarves.mh.model.ProviderProfile
+import com.harnessfork.lc.model.ProviderProfile
 import android.util.Log
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
@@ -176,7 +176,7 @@ internal class LocalFormatGateway(
 
     private fun callProvider(body: JSONObject): Pair<Int, String> {
         val endpoint = profile.baseUrl.trimEnd('/') + "/chat/completions"
-        if (!com.jarves.mh.network.LocalNetwork.isPlainHttpAllowed(endpoint)) {
+        if (!com.harnessfork.lc.network.LocalNetwork.isPlainHttpAllowed(endpoint)) {
             return 400 to errorJson("invalid_request_error", "Plain http:// is only allowed for local network addresses")
         }
         val connection = URL(endpoint).openConnection() as HttpURLConnection

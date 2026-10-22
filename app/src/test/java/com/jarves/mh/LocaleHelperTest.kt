@@ -1,7 +1,7 @@
-package com.jarves.mh
+package com.harnessfork.lc
 
-import com.jarves.mh.ui.LocaleHelper
-import com.jarves.mh.ui.theme.AppLanguage
+import com.harnessfork.lc.ui.LocaleHelper
+import com.harnessfork.lc.ui.theme.AppLanguage
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
