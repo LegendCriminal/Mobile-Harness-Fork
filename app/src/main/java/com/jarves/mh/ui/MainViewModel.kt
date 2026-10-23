@@ -51,7 +51,6 @@ import com.harnessfork.lc.network.ModelDiscoveryResult
 import com.harnessfork.lc.network.ProviderApiClient
 import com.harnessfork.lc.network.GitHubRepository
 import com.harnessfork.lc.runtime.ClaudeRuntimeBridge
-import com.harnessfork.lc.runtime.HermesRuntimeBridge
 import com.harnessfork.lc.runtime.DshRuntimeBridge
 import com.harnessfork.lc.runtime.AgentRegistry
 import com.harnessfork.lc.runtime.AgentUpdateInfo
