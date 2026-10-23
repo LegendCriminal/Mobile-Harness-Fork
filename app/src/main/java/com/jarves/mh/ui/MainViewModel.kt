@@ -51,6 +51,7 @@ import com.harnessfork.lc.network.ModelDiscoveryResult
 import com.harnessfork.lc.network.ProviderApiClient
 import com.harnessfork.lc.network.GitHubRepository
 import com.harnessfork.lc.runtime.ClaudeRuntimeBridge
+import com.harnessfork.lc.runtime.HermesRuntimeBridge
 import com.harnessfork.lc.runtime.DshRuntimeBridge
 import com.harnessfork.lc.runtime.AgentRegistry
 import com.harnessfork.lc.runtime.AgentUpdateInfo
@@ -357,8 +358,8 @@ data class AppUiState(
     val devStackProgress: Float = 0f,
     val devStackBytes: Pair<Long, Long>? = null,
     val devStackBytesPerSecond: Long? = null,
-    val agentKind: AgentKind = AgentKind.CLAUDE_CODE,
-    val primaryAgentKind: AgentKind = AgentKind.CLAUDE_CODE,
+    val agentKind: AgentKind = AgentKind.HERMES,
+    val primaryAgentKind: AgentKind = AgentKind.HERMES,
     val installedAgentVersions: Map<AgentKind, String> = emptyMap(),
     val agentInstalling: AgentKind? = null,
     val agentMessage: String? = null,
@@ -414,6 +415,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val vault = ApiKeyVault(application)
     private val preferences = AppPreferences(application)
     private val claudeRuntime = ClaudeRuntimeBridge(application) { profile -> vault.get(profile.kind.name) }
+    private val hermesRuntime = HermesRuntimeBridge(application) { profile -> vault.get(profile.kind.name) }
     private val dshRuntime = DshRuntimeBridge(application) { profile -> vault.get(profile.kind.name) }
     private val installer = RuntimeInstaller(application)
     private val antigravityRuntime = AntigravityRuntimeBridge(
@@ -427,7 +429,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _state.value.activeChatId?.let { preferences.saveAgentConversation(AgentKind.ANTIGRAVITY, projectId, it, id) }
         },
     )
-    private val agentRegistry = AgentRegistry.builtIns(claudeRuntime, dshRuntime, antigravityRuntime)
+    private val agentRegistry = AgentRegistry.builtIns(claudeRuntime, dshRuntime, antigravityRuntime, hermesRuntime)
     private fun activeRuntime(): com.harnessfork.lc.runtime.RuntimeBridge = agentRegistry.require(_state.value.agentKind).runtime
     private val providerApi = ProviderApiClient(application)
     private fun appUpdater(): AppUpdater = AppUpdater(
@@ -888,6 +890,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 runCatching { claudeRuntime.stopActiveSession() }
                 runCatching { dshRuntime.stopActiveSession() }
                 runCatching { antigravityRuntime.stopActiveSession() }
+                runCatching { hermesRuntime.stopActiveSession() }
             }
             if (!current.projectTerminalRunning) {
                 projectTerminalProcess?.takeIf(Process::isAlive)?.destroyForcibly()
@@ -2045,6 +2048,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         claudeRuntime.configureProjectRoot(projectId, rootPath)
         dshRuntime.configureProjectRoot(projectId, rootPath)
         antigravityRuntime.configureProjectRoot(projectId, rootPath)
+        hermesRuntime.configureProjectRoot(projectId, rootPath)
     }
 
     init {
