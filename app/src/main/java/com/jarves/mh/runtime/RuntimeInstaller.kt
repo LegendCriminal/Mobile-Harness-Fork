@@ -236,6 +236,7 @@ class RuntimeInstaller(private val context: Context) {
             com.harnessfork.lc.model.AgentKind.CLAUDE_CODE -> ensureClaudeInstalled(proot, 0.985f, onProgress)
             com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS -> ensureDshInstalled(proot, 0.985f, onProgress)
             com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> ensureAgyInstalled(proot, 0.985f, onProgress)
+            com.harnessfork.lc.model.AgentKind.HERMES -> { }
         }
         onProgress(RuntimeInstallProgress(str(R.string.rt_install_setup_complete), 1f))
         return InstalledRuntime(proot, rootfs)
@@ -255,6 +256,7 @@ class RuntimeInstaller(private val context: Context) {
             com.harnessfork.lc.model.AgentKind.CLAUDE_CODE -> ensureClaudeInstalled(runtime.proot, 0.05f, onProgress)
             com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS -> ensureDshInstalled(runtime.proot, 0.05f, onProgress)
             com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> ensureAgyInstalled(runtime.proot, 0.05f, onProgress)
+            com.harnessfork.lc.model.AgentKind.HERMES -> { }
         }
         onProgress(RuntimeInstallProgress(str(R.string.rt_install_ready, agent.localizedTitle(context)), 1f))
     }
@@ -274,6 +276,7 @@ class RuntimeInstaller(private val context: Context) {
             com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> isInstalled() &&
                 File(rootfs, AGY_GUEST_PATH.removePrefix("/")).canExecute() &&
                 !agyMarker.readTextOrNull().isNullOrBlank()
+                com.harnessfork.lc.model.AgentKind.HERMES -> isInstalled()
         }
     }
 
@@ -402,6 +405,7 @@ class RuntimeInstaller(private val context: Context) {
             com.harnessfork.lc.model.AgentKind.CLAUDE_CODE -> updateClaude(runtime, expectedVersion, onProgress)
             com.harnessfork.lc.model.AgentKind.DEEPSEEK_HARNESS -> updateDsh(runtime, expectedVersion, onProgress)
             com.harnessfork.lc.model.AgentKind.ANTIGRAVITY -> updateAgy(runtime, expectedVersion, onProgress)
+            com.harnessfork.lc.model.AgentKind.HERMES -> { }
         }
         onProgress(RuntimeInstallProgress(str(R.string.rt_install_version_ready, agent.localizedTitle(context), expectedVersion), 1f, event = RuntimeInstallEvent.COMPLETED))
     }
