@@ -415,7 +415,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val vault = ApiKeyVault(application)
     private val preferences = AppPreferences(application)
     private val claudeRuntime = ClaudeRuntimeBridge(application) { profile -> vault.get(profile.kind.name) }
-    private val hermesRuntime = HermesRuntimeBridge(application) { profile -> vault.get(profile.kind.name) }
+    private val hermesRuntime = ClaudeRuntimeBridge(application) { profile -> vault.get(profile.kind.name) }
     private val dshRuntime = DshRuntimeBridge(application) { profile -> vault.get(profile.kind.name) }
     private val installer = RuntimeInstaller(application)
     private val antigravityRuntime = AntigravityRuntimeBridge(
